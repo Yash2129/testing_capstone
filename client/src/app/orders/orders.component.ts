@@ -11,37 +11,71 @@ import { AuthService } from '../../services/auth.service';
 })
 export class OrdersComponent implements OnInit {
 
- 
-   showError:boolean=false;
-   errorMessage:any;
+  showError:boolean=false;
+  errorMessage:any;
+  showMessage: any;
+  responseMessage: any;
+  orderList: any=[];
+  statusModel:any={newStatus:null}
 
-   showMessage: any;
-   responseMessage: any;
-   orderList: any=[];
+  constructor(
+    public router:Router, 
+    public httpService:HttpService, 
+    private formBuilder: FormBuilder, 
+    private authService:AuthService
+  ) {}
 
-   statusModel:any={newStatus:null}
-   constructor(public router:Router, public httpService:HttpService, private formBuilder: FormBuilder, private authService:AuthService) 
-  {
-  }  
- ngOnInit(): void {
-  
-   }  
- 
-   getOrders() {
-     //complete this function
-   }
-   viewDetails(details:any)
-   {
-    
-   }
-   edit(value:any)
-   {
-     //complete this function
-   }
-   update()
-   {
-    //complete this function
-   }
- }
+  ngOnInit(): void {
+    this.getOrders(); // Call getOrders function when component initializes
+  }
+
+  getOrders() {
+    this.httpService.getorders().subscribe(
+      (response: any) => {
+        // Handle successful response
+        this.orderList = response; // Assign response data to orderList
+      },
+      (error: any) => {
+        // Handle error
+        this.showError = true;
+        this.errorMessage = error.message || 'An error occurred while fetching orders.';
+      }
+    );
+  }
+
+  viewDetails(details:any) {
+    // complete this function
+  }
+
+  edit(order:any) {
+    // complete this function
+    console.log('Edit order:', order);
+  }
+
+  update() {
+    const orderIdToUpdate = 'your_order_id_here'; // Specify the order ID you want to update
+    const newStatus = this.statusModel.newStatus;
+
+    if (!newStatus) {
+      this.showError = true;
+      this.errorMessage = 'Please provide a new status.';
+      return;
+    }
+
+    this.httpService.UpdateOrderStatus(newStatus, orderIdToUpdate).subscribe(
+      (response: any) => {
+        // Handle successful response
+        this.responseMessage = response.message || 'Order status updated successfully.';
+        this.showMessage = true;
+        this.getOrders(); // Refresh the order list after update
+      },
+      (error: any) => {
+        // Handle error
+        this.showError = true;
+        this.errorMessage = error.message || 'An error occurred while updating order status.';
+      }
+    );
+  }
+}
  
  
