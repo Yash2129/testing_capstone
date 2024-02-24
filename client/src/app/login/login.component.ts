@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
   }
 
   registration() {
-    //compelete this
+    
     this.router.navigate(['/registration']);
   }
 }
