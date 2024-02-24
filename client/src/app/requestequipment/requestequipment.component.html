@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-between mt-4">
+    <h2 class="mb-0">Request Equipment</h2>  
+  </div>
+  <div class="row mt-3">
+    <div class="card">
+        <div class="card-header">
+            Order Equipment
+        </div>
+        <div class="card-body">
+            <form class="mb-3 mt-md-4" [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-md-5">
+                      <div class="mb-3">
+                        <label for="content" class="form-label">Hospitals</label>
+                        <!-- //create select with formControlName="hospitalId" and validation -->
+                        <select name="hospitalId" class="form-control" id="hospitalId" formControlName="hospitalId" (change)="onHospitalSelect($event)">
+                       
+                        </select>
+                        <div *ngIf="itemForm.controls['hospitalId'].invalid && (itemForm.controls['hospitalId'].dirty || itemForm.controls['hospitalId'].touched)" class="ng-dirty">
+                          <span *ngIf="itemForm.controls['hospitalId'].errors" class="text-danger">Please choose hospital.</span>
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="content" class="form-label">Equipment</label>
+                      <!-- //create select with formControlName="equipmentId" and validation -->
+                      
+                      </div>
+                      <div class="mb-3">
+                        <label for="content" class="form-label">Order Date</label>
+                           <!-- //create input with formControlName="hospitalId" and validation -->
+                      
+                      </div>
+                    </div>
+                    <div class="col-md-5">
+                      <div class="mb-3">
+                        <label for="quantity" class="form-label">Quantity</label>
+                        <!-- //create input with formControlName="quantity" and validation -->
+                      
+                      </div>
+                      <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                            <!-- //create select with formControlName="status" and validation -->
+                 
+                        <div *ngIf="itemForm.controls['status'].invalid && (itemForm.controls['status'].dirty || itemForm.controls['status'].touched)" class="ng-dirty">
+                          <span *ngIf="itemForm.controls['status'].errors" class="text-danger">Please choose status.</span>
+                        </div>
+                      </div>
+                    </div>
+                 
+                    <div *ngIf="showMessage" class="alert alert-success mt-4" role="alert">
+                      {{ responseMessage }}
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="d-grid">
+                      <br>
+                      <button class="btn btn-outline-dark mt-1" type="submit">Submit</button>
+                    </div>
+                  </div>
+            </form>
+        </div>
+    </div>
+  </div>
+  
