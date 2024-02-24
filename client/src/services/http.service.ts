@@ -91,12 +91,15 @@ export class HttpService {
 
 
 
-  // Login(details: any): Observable<any> {
-  //   //complete this function
-  // }
-  // registerUser(details: any): Observable<any> {
-  //   //complete this function
-  // }
+  Login(details: any): Observable<any> {
+    const url = `${this.serverName}/api/user/login`;
+    return this.http.post(url, details);
+  }
+
+  registerUser(details: any): Observable<any> {
+    const url = `${this.serverName}/api/user/register`;
+    return this.http.post(url, details);
+  }
 
 
 

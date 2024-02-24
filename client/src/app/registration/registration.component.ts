@@ -30,8 +30,27 @@ export class RegistrationComponent {
 
   ngOnInit(): void {
   }
+
+
   onRegister() {
-    //complete this function 
+    
+    if (this.itemForm.invalid) {
+      this.showMessage = true;
+      this.responseMessage = 'Please fill all the required fields correctly.';
+      return;
+    }
+
+    // Call the service to register the user
+    this.bookService.registerUser(this.itemForm.value).subscribe(
+      (response: any) => {
+        this.showMessage = true;
+        this.responseMessage = response.message || 'Registration successful.';
+      },
+      (error: any) => {
+        this.showMessage = true;
+        this.responseMessage = error.message || 'An error occurred while registering.';
+      }
+    );
   }
 
 
