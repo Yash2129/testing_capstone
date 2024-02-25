@@ -20,10 +20,10 @@ export class RegistrationComponent {
 
     this.itemForm = this.formBuilder.group({
       //complete this function 
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      email: ['', Validators.required],
-      role: ['', Validators.required]
+      username: [this.formModel.username, Validators.required],
+      password: [this.formModel.password, Validators.required],
+      email: [this.formModel.email, Validators.required],
+      role: [this.formModel.role, Validators.required]
 
     });
   }
@@ -34,13 +34,13 @@ export class RegistrationComponent {
 
   onRegister() {
     
-    if (this.itemForm.invalid) {
-      this.showMessage = true;
-      this.responseMessage = 'Please fill all the required fields correctly.';
-      return;
-    }
+  //   if (this.itemForm.invalid) {
+  //     this.showMessage = true;
+  //     this.responseMessage = 'Please fill all the required fields correctly.';
+  //     return;
+  //   }
 
-    // Call the service to register the user
+  //   // Call the service to register the user
     this.bookService.registerUser(this.itemForm.value).subscribe(
       (response: any) => {
         this.showMessage = true;
@@ -48,10 +48,12 @@ export class RegistrationComponent {
       },
       (error: any) => {
         this.showMessage = true;
-        this.responseMessage = error.message || 'An error occurred while registering.';
+        this.responseMessage = 'An error occurred while registering.';
       }
     );
-  }
+  
+  console.log(this.itemForm.value);
+   }
 
 
 }

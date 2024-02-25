@@ -11,7 +11,7 @@
               <div class="mb-3">
                 <label for="username" class="form-label ">Username</label>
                 <!-- //create input with formControlName username -->
-                <input type="text" name="username" formControlName="username" ngModel="formModel.username">
+                <input type="text" name="username" formControlName="username">
                 <div
                   *ngIf="itemForm.get('username')?.invalid && (itemForm.get('username')?.dirty || itemForm.get('username')?.touched)"
                   class="ng-dirty">
@@ -21,7 +21,7 @@
 
               <div class="mb-3">
                 <label for="password" class="form-label ">Password</label>
-                <input type="password" name="password" formControlName="password" ngModel="formModel.password">
+                <input type="password" name="password" formControlName="password">
                 <div
                   *ngIf="itemForm.get('password')?.invalid && (itemForm.get('password')?.dirty || itemForm.get('password')?.touched)"
                   class="ng-dirty">

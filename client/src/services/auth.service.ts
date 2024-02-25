@@ -26,10 +26,12 @@ export class AuthService {
   get getLoginStatus(): boolean {
   
       //please complete this
+      return false
    
   }
   getToken(): string | null {
   //please complete this
+  return null;
   }
   logout(){
     //please complete this

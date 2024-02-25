@@ -12,7 +12,7 @@
               <div class="mb-3">
                 <label for="username" class="form-label ">Username</label>
                 <!-- //create input with  formControlName="username" -->
-                <input type="text" name="username" formControlName="username" ngModel="formModel.username">
+                <input type="text" name="username" formControlName="username" [ngModel]="formModel.username">
                 <div
                   *ngIf="itemForm.get('username')?.invalid && (itemForm.get('username')?.dirty || itemForm.get('username')?.touched)"
                   class="ng-dirty">
@@ -23,7 +23,7 @@
               <div class="mb-3">
                 <label for="email" class="form-label ">Email address</label>
                 <!-- //create input with  formControlName="email" -->
-                <input type="email" name="email" formControlName="email" ngModel="formModel.email">
+                <input type="email" name="email" formControlName="email" [ngModel]="formModel.email">
                 <div
                   *ngIf="itemForm.get('email')?.invalid && (itemForm.get('email')?.dirty || itemForm.get('email')?.touched)"
                   class="ng-dirty">
@@ -34,7 +34,7 @@
               <div class="mb-3">
                 <label for="password" class="form-label ">Password</label>
                 <!-- //create input with  formControlName="password" -->
-                <input type="password" name="password" formControlName="password" ngModel="formModel.password">
+                <input type="password" name="password" formControlName="password" [ngModel]="formModel.password">
                 <div
                   *ngIf="itemForm.get('password')?.invalid && (itemForm.get('password')?.dirty || itemForm.get('password')?.touched)"
                   class="ng-dirty">
@@ -43,8 +43,8 @@
               </div>
 
               <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <select name="role" formControlName="role" ngModel="formModel.role">
+                <label for="role" class="form-label">role</label>
+                <select name="role" formControlName="role" [ngModel]="formModel.role">
                   <option value="null">Choose Role</option>
                   <option value="HOSPITAL">HOSPITAL</option>
                   <option value="TECHNICIAN">TECHNICIAN</option>

@@ -13,6 +13,7 @@ export class HttpService {
   constructor(private http: HttpClient) {
   }
 
+  
 
   UpdateOrderStatus(newStatus: any, orderId: any): Observable<any> {
     const url = `${this.serverName}/api/supplier/order/update/${orderId}`;
@@ -97,8 +98,8 @@ export class HttpService {
   }
 
   registerUser(details: any): Observable<any> {
-    const url = `${this.serverName}/api/user/register`;
-    return this.http.post(url, details);
+    
+    return this.http.post(`${this.serverName}/api/user/register`, details);
   }
 
 
