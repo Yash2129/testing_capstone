@@ -13,42 +13,71 @@ import { AuthService } from '../../services/auth.service';
 export class CreatehospitalComponent implements OnInit {
   itemForm: FormGroup;
   equipmentForm: FormGroup;
-  formModel:any={status:null};
-  showError:boolean=false;
-  errorMessage:any;
-  hospitalList:any=[];
-  assignModel: any={};
+  showError: boolean = false;
+  errorMessage: string = '';
+  showMessage: boolean = false;
+  responseMessage: string = '';
+  hospitalList: any = [];
 
-  showMessage: any;
-  responseMessage: any;
-  constructor(public router:Router, public httpService:HttpService, private formBuilder: FormBuilder, private authService:AuthService) 
-    {
-      // this.itemForm =//init this form
+  constructor(public router: Router, public httpService: HttpService, private formBuilder: FormBuilder, private authService: AuthService) {
+    this.itemForm = this.formBuilder.group({
+      // Initialize your form controls here
+      hospitalName: ['', Validators.required],
+      location: ['', Validators.required],
+      contactPerson: ['', Validators.required],
+      contactNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]]
+    });
 
     this.equipmentForm = this.formBuilder.group({
-      //init this form
+      // Initialize your equipment form controls here
+      equipmentName: ['', Validators.required],
+      quantity: ['', [Validators.required, Validators.min(1)]],
+      status: ['', Validators.required]
+    });
   }
+
   ngOnInit(): void {
-
-   
+    this.getHospital();
   }
+
   getHospital() {
-  //complete this function
+    this.httpService.getHospital().subscribe(
+      (response: any) => {
+        this.hospitalList = response;
+      },
+      (error: any) => {
+        this.showError = true;
+        this.errorMessage = error.message || 'An error occurred while fetching hospitals.';
+      }
+    );
   }
 
- 
-  onSubmit()
-  {
-    //complete this function
+  onSubmit() {
+    if (this.itemForm.invalid) {
+      this.showError = true;
+      this.responseMessage = 'Please fill all the required fields correctly.';
+      return;
+    }
+
+    this.httpService.createHospital(this.itemForm.value).subscribe(
+      (response: any) => {
+        this.showMessage = true;
+        this.responseMessage = 'Hospital created successfully.';
+        // Reset the form after successful submission
+        this.itemForm.reset();
+      },
+      (error: any) => {
+        this.showError = true;
+        this.responseMessage = error.message || 'An error occurred while creating the hospital.';
+      }
+    );
   }
-  Addequipment(value:any)
-  {
-    
-    //complete this function
+
+  Addequipment(value: any) {
+    // Implement functionality to add equipment to hospital
   }
-  submitEquipment()
-  {
-     //complete this function
+
+  submitEquipment() {
+    // Implement functionality to submit equipment
   }
-  
 }
